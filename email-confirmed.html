@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-mail bevestigd — Drivaro</title>
+    <title>Email confirmed — Drivaro</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f7f9fc;
@@ -21,7 +16,6 @@
             justify-content: center;
             padding: 24px;
         }
-
         .card {
             background: #ffffff;
             border-radius: 16px;
@@ -31,7 +25,28 @@
             padding: 48px 32px;
             text-align: center;
         }
-
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            font-size: 13px;
+        }
+        .lang-switch button {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .lang-switch button.active {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .lang-switch button:hover { color: #1a1a2e; }
         .checkmark {
             display: inline-flex;
             align-items: center;
@@ -44,75 +59,101 @@
             font-size: 36px;
             margin-bottom: 24px;
         }
-
         h1 {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 16px;
             color: #1a1a2e;
         }
-
-        .subtitle {
-            font-size: 16px;
-            color: #6b7280;
-            margin-bottom: 32px;
-        }
-
         .message {
             font-size: 16px;
             line-height: 1.6;
             color: #374151;
-            margin-bottom: 12px;
-        }
-
-        .message-en {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #6b7280;
-            font-style: italic;
             margin-bottom: 32px;
         }
-
         .divider {
             border: none;
             border-top: 1px solid #e5e7eb;
             margin: 0 0 24px 0;
         }
-
         .instruction {
             font-size: 14px;
             color: #6b7280;
             line-height: 1.5;
         }
-
-        .instruction-en {
-            font-size: 13px;
-            color: #9ca3af;
-            font-style: italic;
-        }
-
         .brand {
             margin-top: 32px;
             font-size: 13px;
             color: #9ca3af;
         }
+        .lang-block { display: none; }
+        .lang-block.active { display: block; }
+        /* noscript fallback: toon alle talen */
+        .no-js .lang-block { display: block; margin-bottom: 24px; }
+        .no-js .lang-switch { display: none; }
     </style>
 </head>
-<body>
+<body class="no-js">
     <div class="card">
         <div class="checkmark" aria-hidden="true">&#10003;</div>
-        <h1>E-mail bevestigd</h1>
-        <p class="subtitle">Email confirmed</p>
 
-        <p class="message">Je e-mailadres is bevestigd. Je kunt nu inloggen in de Drivaro app.</p>
-        <p class="message-en">Your email has been confirmed. You can now sign in to the Drivaro app.</p>
+        <div class="lang-switch" id="langSwitch">
+            <button data-lang="nl">NL</button>
+            <button data-lang="en">EN</button>
+            <button data-lang="de">DE</button>
+            <button data-lang="fr">FR</button>
+            <button data-lang="es">ES</button>
+        </div>
 
-        <hr class="divider">
+        <div class="lang-block" data-lang="nl">
+            <h1>E-mail bevestigd</h1>
+            <p class="message">Je e-mailadres is bevestigd. Je kunt nu inloggen in de Drivaro app.</p>
+            <hr class="divider">
+            <p class="instruction">Sluit deze pagina en open Drivaro op je telefoon.</p>
+        </div>
 
-        <p class="instruction">Sluit deze pagina en open Drivaro op je telefoon.</p>
-        <p class="instruction-en">Close this page and open Drivaro on your phone.</p>
+        <div class="lang-block" data-lang="en">
+            <h1>Email confirmed</h1>
+            <p class="message">Your email has been confirmed. You can now sign in to the Drivaro app.</p>
+            <hr class="divider">
+            <p class="instruction">Close this page and open Drivaro on your phone.</p>
+        </div>
+
+        <div class="lang-block" data-lang="de">
+            <h1>E-Mail bestätigt</h1>
+            <p class="message">Deine E-Mail-Adresse wurde bestätigt. Du kannst dich jetzt in der Drivaro-App anmelden.</p>
+            <hr class="divider">
+            <p class="instruction">Schließe diese Seite und öffne Drivaro auf deinem Telefon.</p>
+        </div>
+
+        <div class="lang-block" data-lang="fr">
+            <h1>E-mail confirmé</h1>
+            <p class="message">Votre adresse e-mail a été confirmée. Vous pouvez maintenant vous connecter à l'application Drivaro.</p>
+            <hr class="divider">
+            <p class="instruction">Fermez cette page et ouvrez Drivaro sur votre téléphone.</p>
+        </div>
+
+        <div class="lang-block" data-lang="es">
+            <h1>Correo confirmado</h1>
+            <p class="message">Tu correo electrónico ha sido confirmado. Ahora puedes iniciar sesión en la aplicación Drivaro.</p>
+            <hr class="divider">
+            <p class="instruction">Cierra esta página y abre Drivaro en tu teléfono.</p>
+        </div>
 
         <p class="brand">Drivaro</p>
     </div>
-</body>
-</html>
+
+    <script>
+        document.body.classList.remove('no-js');
+
+        const SUPPORTED = ['nl', 'en', 'de', 'fr', 'es'];
+        const FALLBACK = 'en';
+
+        function detectLang() {
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+            return SUPPORTED.includes(browserLang) ? browserLang : FALLBACK;
+        }
+
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-block').forEach(b =>
