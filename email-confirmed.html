@@ -156,4 +156,19 @@
 
         function setLang(lang) {
             document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-block').forEach(b =>
+            document.querySelectorAll('.lang-block').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === lang);
+            });
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        document.querySelectorAll('.lang-switch button').forEach(btn => {
+            btn.addEventListener('click', () => setLang(btn.dataset.lang));
+        });
+
+        setLang(detectLang());
+    </script>
+</body>
+</html>
